@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/creepy overworld (loop).mp3-624edc759cd3ad0b3a600b1bee007729.mp3str"
+
+[deps]
+
+source_file="res://music/creepy overworld (loop).mp3"
+dest_files=[ "res://.import/creepy overworld (loop).mp3-624edc759cd3ad0b3a600b1bee007729.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

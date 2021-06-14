@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/icosphere.obj-8196cc9fb0bb036aa5342ef05542a326.mesh"
+
+[deps]
+
+files=[ "res://.import/icosphere.obj-8196cc9fb0bb036aa5342ef05542a326.mesh" ]
+
+source_file="res://world/level_01/buildings/icosphere.obj"
+dest_files=[ "res://.import/icosphere.obj-8196cc9fb0bb036aa5342ef05542a326.mesh", "res://.import/icosphere.obj-8196cc9fb0bb036aa5342ef05542a326.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

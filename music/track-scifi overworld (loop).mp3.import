@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/track-scifi overworld (loop).mp3-bc97f5ea40a57a61bdf740c7e289b2f4.mp3str"
+
+[deps]
+
+source_file="res://music/track-scifi overworld (loop).mp3"
+dest_files=[ "res://.import/track-scifi overworld (loop).mp3-bc97f5ea40a57a61bdf740c7e289b2f4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

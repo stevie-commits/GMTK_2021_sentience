@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://world/common/level_template.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world/level_01/buildings/reactor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://world/level_01/buildings/icosphere.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://world/level_01/buildings/mat_ground.material" type="Material" id=4]
+[ext_resource path="res://world/level_01/buildings/lab_01.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world/level_01/buildings/farm_03.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/level_01/buildings/farm_02.tscn" type="PackedScene" id=7]
+[ext_resource path="res://world/level_01/buildings/farm_01.tscn" type="PackedScene" id=8]
+[ext_resource path="res://narrative/dialog_controller.tscn" type="PackedScene" id=9]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 800, 800 )
+
+[node name="CityMap" instance=ExtResource( 1 )]
+building_scenes = [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ) ]
+building_radius = 30.0
+
+[node name="ScatterShape" type="CollisionPolygon" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+polygon = PoolVector2Array( -21.6847, -71.5753, 35.8005, -67.583, 70.0842, -30.8808, 75.8442, 10.0138, 57.6014, 52.8748, 28.7868, 72.5398, -14.9042, 77.9008, -44.211, 64.0489, -67.9895, 44.1317, -78.3759, 383.861, 70.4195, 385.003, 276.099, 384.717, 411.551, 378.03, 604.242, 345.056, 661.545, 254.328, 672.91, 56.2326, 675.491, -84.1523, 594.676, -329.043, 379.275, -367.347, 159.179, -366.955, -2.15585, -369.367, -85.2762, -329.101, -80.0873, -197.841, -69.5948, -107.818, -71.7595, -43.5705, -47.9509, -59.5977 )
+
+[node name="reactor" parent="." index="1" instance=ExtResource( 2 )]
+
+[node name="Ground" type="CSGCombiner" parent="." index="2"]
+
+[node name="Plane" type="CSGMesh" parent="Ground" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 297, -1.16579, 0 )
+mesh = SubResource( 1 )
+material = ExtResource( 4 )
+
+[node name="Icosphere" type="CSGMesh" parent="Ground" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.16579, 0 )
+operation = 2
+mesh = ExtResource( 3 )
+
+[node name="SignalSources" type="Spatial" parent="." index="3"]
+
+[node name="Position" type="Position3D" parent="SignalSources" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.30466, 0, 275.428 )
+
+[node name="Position2" type="Position3D" parent="SignalSources" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 316.406, 0, 368.13 )
+
+[node name="Position3" type="Position3D" parent="SignalSources" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 465.321, -22.1135, 385.836 )
+
+[node name="Position4" type="Position3D" parent="SignalSources" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 569.054, 0, -5.08284 )
+
+[node name="Position5" type="Position3D" parent="SignalSources" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 656.944, 0, 127.345 )
+
+[node name="Position6" type="Position3D" parent="SignalSources" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 613.273, 3.05176e-05, -358.478 )
+
+[node name="Position7" type="Position3D" parent="SignalSources" index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 643.718, 0, -146.572 )
+
+[node name="Position8" type="Position3D" parent="SignalSources" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 405.405, 3.05176e-05, -386.373 )
+
+[node name="Position9" type="Position3D" parent="SignalSources" index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 183.689, 0, 390.484 )
+
+[node name="Position10" type="Position3D" parent="SignalSources" index="9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -81.2395, 0, -354.28 )
+
+[node name="Position11" type="Position3D" parent="SignalSources" index="10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 154.29, 0, -379.632 )
+
+[node name="Buildings" type="Spatial" parent="." index="4"]
+
+[node name="DialogController" parent="." index="5" instance=ExtResource( 9 )]

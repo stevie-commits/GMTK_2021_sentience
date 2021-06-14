@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://ui/menus/main_menu/title_screen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/menus/credits_menu/credits_screen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/menus/settings_menu/settings_screen.tscn" type="PackedScene" id=5]
+[ext_resource path="res://music/Start-screen-song.mp3" type="AudioStream" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="Animation" id=2]
+resource_name = "screen_transition"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MenuTabs:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_disable_input"
+}, {
+"args": [ "screen_transition" ],
+"method": "emit_signal"
+}, {
+"args": [  ],
+"method": "_enable_input"
+} ]
+}
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuTabs" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+tabs_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleScreen" parent="MenuTabs" instance=ExtResource( 2 )]
+
+[node name="SettingsScreen" parent="MenuTabs" instance=ExtResource( 5 )]
+visible = false
+
+[node name="CreditsScreen" parent="MenuTabs" instance=ExtResource( 4 )]
+visible = false
+
+[node name="TransitionPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
+anims/screen_transition = SubResource( 2 )
+
+[node name="BackgroundAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "Music"

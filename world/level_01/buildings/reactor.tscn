@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://world/level_01/buildings/reactor.glb" type="PackedScene" id=1]
+[ext_resource path="res://world/level_01/buildings/reactor.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "spin"
+length = 16.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("RingOuter:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 8, 16 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 180 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RingMid:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4, 8, 12, 16 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 90, 180, 0 ), Vector3( 180, 360, 0 ), Vector3( 270, 180, 0 ), Vector3( 360, 360, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("RingInner:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.02144, 2, 3.02144, 4, 5.02144, 6, 7.02144, 8, 9.02144, 10, 11.0214, 12, 13.0214, 14, 15, 16 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 360, 360, 360 ), Vector3( 0, 0, 0 ), Vector3( 360, 360, 360 ), Vector3( 0, 0, 0 ), Vector3( 360, 360, 360 ), Vector3( 0, 0, 0 ), Vector3( 360, 360, 360 ), Vector3( 0, 0, 0 ), Vector3( 360, 360, 360 ), Vector3( 0, 0, 0 ), Vector3( 360, 360, 360 ), Vector3( 0, 0, 0 ), Vector3( 360, 360, 360 ), Vector3( 0, 0, 0 ), Vector3( 360, 360, 360 ), Vector3( 0, 0, 0 ) ]
+}
+
+[node name="Reactor" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="RingInner" parent="." index="3"]
+transform = Transform( 0.259299, 0.63177, -0.170007, -0.170007, 0.763362, 0.194582, 0.252708, -0.134703, 0.305345, 0, 12.7442, 0 )
+
+[node name="RingMid" parent="." index="4"]
+transform = Transform( -0.672343, 0.676893, 0.299617, 0, -0.404757, 0.914424, 0.74024, 0.614806, 0.272136, 0, 0, 0 )
+
+[node name="RingOuter" parent="." index="5"]
+transform = Transform( -0.404757, -0.914424, 0, 0.914424, -0.404757, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+anims/spin = SubResource( 1 )

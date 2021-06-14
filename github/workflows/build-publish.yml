@@ -1,0 +1,56 @@
+name: Build release and publish to itch
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build project
+    env:
+      BINARY_NAME: sentience
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          lfs: true
+      - name: Setup
+        env:
+          GODOT_VERSION: 3.3.2
+        run: |
+          echo "Installing dependencies"
+          apt-get update && apt-get install -y --no-install-recommends wget zip unzip
+          echo "Installing Godot"
+          mkdir -v -p ~/.cache
+          mkdir -v -p ~/.config/godot
+          mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
+          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          unzip Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
+          mv Godot_v${GODOT_VERSION}-stable_linux_headless.64 godot
+          chmod +x godot
+          unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          mv templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          rm -f Godot_v${GODOT_VERSION}-stable_export_templates.tpz Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
+          echo "Installed Godot"
+          echo "Installing Butler"
+          wget -O butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          rm -f butler.zip
+          echo "Installed Butler"
+          mkdir -v -p builds/windows
+          mkdir -v -p builds/linux
+          mkdir -v -p builds/HTML5
+      - name: Build
+        id: build
+        run: |
+          ./godot -v --path ${{ github.workspace }} --export "${BINARY_NAME}-windows" builds/windows/${BINARY_NAME}.exe
+          ./godot -v --path ${{ github.workspace }} --export "${BINARY_NAME}-linux" builds/linux/${BINARY_NAME}.x86_64
+          ./godot -v --path ${{ github.workspace }} --export "${BINARY_NAME}-HTML5" builds/HTML5/index.html
+      - name: Deploy to itch.io
+        run: |
+          ./butler push builds/linux pranavsk/${BINARY_NAME}:linux --userversion="${GITHUB_REF:10}" --fix-permissions
+          ./butler push builds/windows pranavsk/${BINARY_NAME}:windows --userversion="${GITHUB_REF:10}" --fix-permissions
+          ./butler push builds/HTML5 pranavsk/${BINARY_NAME}:html5 --userversion="${GITHUB_REF:10}" --fix-permissions
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_CREDENTIALS }}

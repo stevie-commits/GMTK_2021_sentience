@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/electric ambience (loop).mp3-5966e8a20adcb15efdef445ba79d79e1.mp3str"
+
+[deps]
+
+source_file="res://music/electric ambience (loop).mp3"
+dest_files=[ "res://.import/electric ambience (loop).mp3-5966e8a20adcb15efdef445ba79d79e1.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/overworld drone (loop).mp3-e7c74eb2d901f94971104ed09677fec6.mp3str"
+
+[deps]
+
+source_file="res://music/overworld drone (loop).mp3"
+dest_files=[ "res://.import/overworld drone (loop).mp3-e7c74eb2d901f94971104ed09677fec6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
